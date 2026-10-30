@@ -35,6 +35,11 @@ def index():
     return FileResponse(STATIC / "index.html")
 
 
+@app.get("/healthz")
+def healthz():
+    return {"ok": True}
+
+
 @app.get("/api/meta")
 def meta():
     return {"period": data.PERIOD, "providers": len(data.PROVIDERS), "models": llm.MODELS}
