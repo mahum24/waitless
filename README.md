@@ -2,6 +2,9 @@
 
 **Same treatment. Months sooner.**
 
+**Live demo:** https://waitless-rzio.onrender.com  
+(Free hosting: if it has been idle, the first load takes about 50 seconds to wake up.)
+
 NHS England's August 2026 figures show 7.2 million treatment pathways waiting in England. Most of them have a legal right to choose which provider they're referred to, and waits for the same specialty can differ by months between hospitals a short drive apart. Almost nobody uses that right, because comparing hospitals means digging through NHS statistics spreadsheets and then knowing what to say to your GP.
 
 WaitLess does it in about 15 seconds. Upload a photo of your referral letter (or describe it), enter your postcode, and it:
