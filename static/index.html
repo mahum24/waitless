@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WaitLess</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand"><span class="logo">W</span>WaitLess</div>
+    <div class="meta" id="meta">Loading NHS data…</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Same treatment. <span class="accent">Months sooner.</span></h1>
+    <p>In England you have a legal right to choose which hospital you're referred to, and waits for the same specialty differ by months. WaitLess reads your referral, compares hospitals using the latest NHS England waiting-time data, checks inspection ratings and recent news, then writes the letter to send your GP.</p>
+  </section>
+
+  <section class="grid">
+    <form id="form" class="card form">
+      <div class="upload">
+        <label class="upload-btn">
+          <input id="file" type="file" accept="image/*,application/pdf" hidden>
+          <span class="ico">⤒</span><span><b>Upload your referral letter</b><small>Photo or PDF. Name, date of birth and NHS number are blanked out.</small></span>
+        </label>
+        <button type="button" id="sampleLetter" class="linkish">or use an example letter photo</button>
+      </div>
+      <label>What has your GP referred you for?
+        <textarea id="referral" rows="6" placeholder="Paste your referral letter, or describe it in your own words…" required></textarea>
+      </label>
+      <div class="samples">
+        <span>Try:</span>
+        <button type="button" data-sample="knee">Knee replacement</button>
+        <button type="button" data-sample="cataract">Cataract</button>
+        <button type="button" data-sample="gynae">Endometriosis</button>
+      </div>
+      <div class="row">
+        <label>Your postcode
+          <input id="postcode" placeholder="e.g. LE1 5WW" required>
+        </label>
+        <label>How far will you travel? <b id="milesOut">40 miles</b>
+          <input id="miles" type="range" min="5" max="120" step="5" value="40">
+        </label>
+      </div>
+      <label>Anything that matters to you? <small>(optional)</small>
+        <input id="context" placeholder="e.g. I don't drive; I care for my mum on weekdays">
+      </label>
+      <button class="go" id="go" type="submit">Find shorter waits</button>
+      <p class="fine">Your text is only used to answer this request and isn't stored.</p>
+    </form>
+
+    <aside class="card agent">
+      <h3>Agent at work</h3>
+      <ol id="steps" class="steps">
+        <li data-step="vision" class="optional"><span class="chip vision">Nemotron VL</span>Read &amp; redact your letter photo</li>
+        <li data-step="read"><span class="chip nano">Nemotron Nano</span>Read the referral &amp; pick the specialty</li>
+        <li data-step="locate"><span class="chip data">Rules</span>Check you're covered by the right to choose</li>
+        <li data-step="rank"><span class="chip data">NHS data</span>Rank hospitals by wait &amp; distance</li>
+        <li data-step="research"><span class="chip tavily">Tavily</span>Search CQC ratings &amp; recent news</li>
+        <li data-step="verify"><span class="chip super">Nemotron Super</span>Extract evidence &amp; check every quote</li>
+        <li data-step="decide"><span class="chip ultra">Nemotron Ultra</span>Weigh the trade-offs for you</li>
+        <li data-step="letter"><span class="chip super">Nemotron Super</span>Draft your GP letter</li>
+      </ol>
+      <div id="routing" class="routing hidden"></div>
+    </aside>
+  </section>
+
+  <div id="error" class="error hidden"></div>
+  <div id="notice" class="notice hidden"></div>
+
+  <section id="results" class="hidden">
+    <div class="card headline">
+      <div class="big" id="saved"></div>
+      <div>
+        <h2 id="headline"></h2>
+        <p id="compare"></p>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card"><div id="map"></div></div>
+      <div class="card">
+        <h3>Why this choice</h3>
+        <ul id="reasons" class="reasons"></ul>
+        <h4>Worth knowing</h4>
+        <ul id="tradeoffs" class="reasons muted"></ul>
+        <h4>Ask your GP</h4>
+        <ul id="askgp" class="reasons muted"></ul>
+      </div>
+    </div>
+
+    <h3 class="section">Your shortlist</h3>
+    <div id="cards" class="cards"></div>
+
+    <div class="card letter">
+      <div class="letter-head">
+        <h3>Your letter to your GP</h3>
+        <div><button id="copy" type="button">Copy</button><button id="download" type="button">Download</button></div>
+      </div>
+      <pre id="letter"></pre>
+    </div>
+
+    <details class="card more">
+      <summary>All hospitals in range (<span id="allCount"></span>)</summary>
+      <table id="all"><thead><tr><th>Provider</th><th>Miles</th><th>Median wait</th><th>9 in 10 seen within</th><th>Within 18 wks</th></tr></thead><tbody></tbody></table>
+    </details>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  Waiting times: NHS England Consultant-led Referral to Treatment statistics (<span id="period"></span>), incomplete pathways. Locations: NHS ODS &amp; postcodes.io. Ratings and news are live web results and are checked against their sources. WaitLess is not medical advice; your GP decides what is clinically appropriate.
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
