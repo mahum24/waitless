@@ -23,6 +23,9 @@ SPACES = {
     "mouldproof": ("Mouldproof", "Awaab's Law case builder with NVIDIA Nemotron",
                    "Mouldproof turns photos of damp and mould into Awaab's Law deadlines, a verified landlord record and letters, "
                    "using NVIDIA Nemotron models on Nebius Token Factory and Tavily.", "https://github.com/mahum24/mouldproof"),
+    "repodojo": ("RepoDojo", "Practise AI-assisted code-comprehension interviews",
+                 "RepoDojo turns a GitHub repo into a guided tour and a test-verified debugging interview with a sometimes-wrong AI "
+                 "assistant, scored by NVIDIA Nemotron on Nebius Token Factory.", "https://github.com/mahum24/repodojo"),
 }
 
 SPACE_README = """---
