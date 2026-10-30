@@ -151,7 +151,9 @@ function render(done) {
   $("#askgp").innerHTML = (d.ask_gp || []).map((r) => `<li>${esc(r)}</li>`).join("");
 
   const maxW = Math.max(...done.shortlist.map((s) => s.p92_weeks));
-  $("#cards").innerHTML = done.shortlist.map((s) => {
+  const order = (s) => s.code === d.recommended_code ? 0 : s.code === d.backup_code ? 1 : base && s.code === base.code ? 3 : 2;
+  const sorted = [...done.shortlist].sort((a, b) => order(a) - order(b));
+  $("#cards").innerHTML = sorted.map((s) => {
     const ev = s.evidence || {}, isRec = s.code === d.recommended_code, isBase = base && s.code === base.code;
     const tag = isRec ? "Recommended" : s.code === d.backup_code ? "Backup" : isBase ? "Your nearest NHS trust" : "Option";
     const badge = ev.verified

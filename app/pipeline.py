@@ -131,6 +131,8 @@ Options (waits are from NHS England RTT data {data.PERIOD}; median_weeks = media
 {json.dumps(table)}
 
 Choose the best option for THIS patient, weighing wait time, travel and their needs, and inspection quality where verified.
+Only state facts that appear above. Do not claim anything about transport links, parking, facilities or services that isn't in the data;
+if the patient's needs depend on something unknown, put it in ask_gp or tradeoffs as something to check.
 Return JSON:
 {{"recommended_code": "...", "backup_code": "...",
   "headline": "one sentence a patient understands",
